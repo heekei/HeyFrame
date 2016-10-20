@@ -1,2 +1,2 @@
-# HeyFrame
-HeyFrame
+# HeyLib
+make it easier!
