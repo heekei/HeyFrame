@@ -2,16 +2,45 @@
 <html>
 
 <head>
-    <title>HeyFrame</title>
-    <meta charset="UTF-8">
-    <script src="HeyFrame.js"></script>
-    <script>
-        
+	<title>HeyFrame</title>
+	<meta charset="UTF-8">
+	<script src="HeyLib.js"></script>
+	<script>
+        // setTimeout(function(){
+        //     $(".cs2").eq(0).addClass("zxq");
+        // },3000);
     </script>
 </head>
+<!--https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=%E5%85%B3%E9%94%AE%E5%AD%97&cb=callback-->
 
 <body>
+	
+	<div>
+		<input id="wd" type="text" name="wd" value="" oninput="someclick()">
+		<ul class="predict">
 
+		</ul>
+	</div>
+	<script>
+        function someclick(){
+            $.getJSON("https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su","wd="+$("#wd")[0].value,function(data){
+                $(".predict")[0].innerHTML = "";
+                for(var x in data.s){
+                    var li = document.createElement("li");
+                    li.innerHTML = data.s[x];
+                    $(".predict")[0].appendChild(li);
+                }
+                // $(".predict")[0].innerHTML = data.s;
+            });
+
+        }
+        
+    </script>
+	<div style="width: 300px; height: 300px; background: lightblue;" class="dc-width-10% cls1 cs2">adas</div>
+	<div style="width: 300px; height: 300px; background: lightblue;" class="dc-width-20% cls1">adas</div>
+	<div style="width: 300px; height: 300px; background: lightblue;" class="dc-width-30% cls1">adas</div>
+	<div style="width: 300px; height: 300px; background: lightblue;" class="dc-width-40% cls1">adas</div>
+	<div style="width: 300px; height: 300px; background: lightblue;" class="dc-width-50% cls1">adas</div>
 </body>
 
 </html>
