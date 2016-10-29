@@ -1,21 +1,21 @@
 /**
- HeyFrame
- @namespace HeyFrame
+ HeyLib
+ @namespace HeyLib
  @author Heekei
  @email heekei@foxmail.com
- @version 0.1.0
+ @version 0.1.1
  @date 2016/10/7
 */
 (function (window, undefined) {
     /**
-     * @namespace HeyFrame
+     * @namespace HeyLib
      * @constructor
      */
-    var HeyFrame = function (arguments) {
-        return new HeyFrame.fn.init(arguments);
+    var HeyLib = function (arguments) {
+        return new HeyLib.fn.init(arguments);
     }
-    HeyFrame.fn = HeyFrame.prototype = {
-        constructor: HeyFrame,
+    HeyLib.fn = HeyLib.prototype = {
+        constructor: HeyLib,
         init: function (arguments) {
             var tp = typeof arguments;
             if (tp === "string") {
@@ -28,7 +28,7 @@
                 }
 
                 _this.length = lenOfDoms;
-                // _this.prototype = HeyFrame.fn;
+                // _this.prototype = HeyLib.fn;
                 return _this;
             }
             else if (tp === "object") {
@@ -37,82 +37,81 @@
                 return this;
             }
         },
-        sayHi: function () {
-            console.log("this");
-        },
         eq: function (index) {
-            return new HeyFrame.fn.init(this[index]);
+            return new HeyLib.fn.init(this[index]);
         },
         className: function () {
             return this[0].className;
         },
         addClass: function (param) {
             var _this = this;
-            // HeyFrame.log(_this);
+            // HeyLib.log(_this);
             for (var x in _this) {
                 var oldArrClass = new String(_this[x].className).toString().split(" ");
                 oldArrClass.push(param);
                 var newStrClass = oldArrClass.join(" ");
                 _this[x].className = newStrClass;
-                // HeyFrame.log(_this);
+                // HeyLib.log(_this);
             }
         },
-        // etype,target,func
-        // etype,func
-        on: function (etype,/* target, */func) {
-            var p = arguments;
-            var _this = this;
-            var len = _this.length;
-            for (var x = 0; x < len; x++) {
-                // $.dir(_this[x]);
-                if (arguments.length == 2) {
-                    _this[x].addEventListener(p[0], p[1]);
-                }
-                else {
-                    _this[x].addEventListener(p[0], p[1], p[2]);
-                }
-            }
-        },
-        //etype,target,func
-        //etype,func || etype
-        off:function(){
-            var p = arguments;
-            var _this = this;
-            var len = _this.length;
-            for (var x = 0; x < len; x++) {
-                if(p.length == 1){
-                    _this[x].removeEventListener(p[0]);
-                }
-                else if (p.length == 2) {
-                    _this[x].removeEventListener(p[0],null);
-                }
-                else {
-                    _this[x].removeEventListener(p[0], p[1], p[2]);
-                }
-            }
-        }
+        // // etype,target,func
+        // // etype,func
+        // on: function (etype,/* target, */func) {
+        //     var p = arguments;
+        //     var _this = this;
+        //     var len = _this.length;
+        //     for (var x = 0; x < len; x++) {
+        //         // $.dir(_this[x]);
+        //         if (arguments.length == 2) {
+        //             _this[x].addEventListener(p[0], p[1]);
+        //         }
+        //         else {
+        //             _this[x].addEventListener(p[0], p[1], p[2]);
+        //         }
+        //     }
+        // },
+        // //etype,target,func
+        // //etype,func || etype
+        // off: function () {
+        //     var p = arguments;
+        //     var _this = this;
+        //     var len = _this.length;
+        //     for (var x = 0; x < len; x++) {
+        //         if (p.length == 1) {
+        //             _this[x].removeEventListener(p[0]);
+        //         }
+        //         else if (p.length == 2) {
+        //             _this[x].removeEventListener(p[0], null);
+        //         }
+        //         else {
+        //             _this[x].removeEventListener(p[0], p[1], p[2]);
+        //         }
+        //     }
+        // }
     };
-    HeyFrame.log = function (params) {
+    HeyLib.log = function (params) {
         console.log(params);
     };
-    HeyFrame.dir = function (params) {
+    HeyLib.dir = function (params) {
         console.dir(params);
     };
-    HeyFrame.getJSON = function(url,param,callback){
-        // var cb;
-        // (typeof callback =="string")?
-        var callbackFunction = callback;
-        cb = function(data){
-            // setTimeout(function(){
-            //     callbackFunction(data);
-            // },0)
-            callbackFunction(data);
-        };
-        s = document.createElement("script");
-        s.src = url +("?"+ param + "&cb=cb");
-        document.head.appendChild(s);
-        // callbackFunction();
-    }
+    // HeyLib.getJSON = function (url, param, callback) {
+    //     // var cb;
+    //     // (typeof callback =="string")?
+    //     var callbackFunction = callback;
+    //     cb = function (data) {
+    //         // setTimeout(function(){
+    //         //     callbackFunction(data);
+    //         // },0)
+    //         callbackFunction(data);
+    //     };
+    //     s = document.createElement("script");
+    //     s.src = url + ("?" + param + "&cb=cb");
+    //     document.head.appendChild(s);
+    //     // callbackFunction();
+    // }
+
+
     /**
      * 改造setInterval，使其支持传参
      * @method setTimer
@@ -121,7 +120,7 @@
      * @param delay {Number} the interval of timer
      * @return {Number} The return of  "setInterval" 
      */
-    HeyFrame.setTimer = function (func, param, delay) {
+    HeyLib.setTimer = function (func, param, delay) {
         return setInterval(function () {
             func(param);
         }, delay);
@@ -133,7 +132,7 @@
      * @param DesignDraftWidth {Number} 设计稿宽度
      * @return {void} 无返回值
      */
-    HeyFrame.resetRem = function (defaultFontsize, DesignDraftWidth) {
+    HeyLib.resetRem = function (defaultFontsize, DesignDraftWidth) {
         var docEl = document.documentElement,
             resizeEvt = 'orientationchange' in window ? 'orientationchange' : 'resize',
             recalc = function () {
@@ -152,12 +151,12 @@
      * @param [c={}] {Object} 新对象(可选)
      * @return {Object} 返回新对象
      */
-    HeyFrame.deepCopy = function (p, c) {
+    HeyLib.deepCopy = function (p, c) {
         var c = c || {};
         for (var i in p) {
             if (typeof p[i] === 'object') {
                 c[i] = (p[i].constructor === Array) ? [] : {};
-                HeyFrame.deepCopy(p[i], c[i]);
+                HeyLib.deepCopy(p[i], c[i]);
             } else {
                 c[i] = p[i];
             }
@@ -170,7 +169,7 @@
      * @param [obj={}] {object} $释放对象(可选)
      * @return {void} 无返回值
      */
-    HeyFrame.noConflict = function (obj) {
+    HeyLib.noConflict = function (obj) {
         if (typeof obj !== "undefined") {
             window.$ = obj;
         }
@@ -183,8 +182,9 @@
      * @method DynamicCSS
      * @param null
      * @return {void} 无返回值
+     * @example class="dc-width-100px"
      */
-    HeyFrame.DynamicCSS = function () {
+    HeyLib.DynamicCSS = function () {
         var doms = document.querySelectorAll("[class]");
 
         for (var x in doms) {
@@ -201,8 +201,83 @@
 
         }
     };
+    /**
+     * 多行字数限制
+     * @param node {HTMLElement} 元素或元素集合
+     * @param show {Number} 长度
+     * @return null
+     */
+    HeyLib.hiddenChar = function (node, show) {
+        for (var i = 0; i < node.length; i++) {
+            var node_str = node[i].innerHTML;
 
-
-    HeyFrame.fn.init.prototype = HeyFrame.fn;
-    window.HeyFrame = window.$ = HeyFrame;
+            if (node_str.length > show) {
+                var show_str = node_str.substr(0, show) + "...";
+                node[i].innerHTML = show_str;
+            }
+        }
+    };
+    /**
+     * getIE
+     * @param null 
+     * @return {Number} 返回IE版本：6|7|8|9|10
+     */
+    HeyLib.getIE = function () {
+        var browser = navigator.appName
+        var b_version = navigator.appVersion
+        var version = b_version.split(";");
+        var trim_Version = version[1] ? version[1].replace(/[ ]/g, "") : null;
+        if (trim_Version != null) {
+            if (browser == "Microsoft Internet Explorer" && trim_Version == "MSIE6.0") {
+                return 6;
+            } else if (browser == "Microsoft Internet Explorer" && trim_Version == "MSIE7.0") {
+                return 7;
+            } else if (browser == "Microsoft Internet Explorer" && trim_Version == "MSIE8.0") {
+                return 8;
+            } else if (browser == "Microsoft Internet Explorer" && trim_Version == "MSIE9.0") {
+                return 9;
+            } else if (browser == "Microsoft Internet Explorer" && trim_Version == "MSIE10.0") {
+                return 10;
+            }
+        }
+    }
+    //加入收藏
+    HeyLib.addFavorite2 = function () {
+        var url = window.location;
+        var title = document.title;
+        var ua = navigator.userAgent.toLowerCase();
+        if (ua.indexOf("360se") > -1) {
+            alert("由于360浏览器功能限制，请按 Ctrl+D 手动收藏！");
+        } else if (ua.indexOf("msie 8") > -1) {
+            window.external.AddToFavoritesBar(url, title); //IE8
+        } else if (document.all) {
+            try {
+                window.external.addFavorite(url, title);
+            } catch (e) {
+                alert('您的浏览器不支持,请按 Ctrl+D 手动收藏!');
+            }
+        } else {
+            alert('您的浏览器不支持,请按 Ctrl+D 手动收藏!');
+        }
+    }
+    //设为首页
+    HeyLib.SetHomePage = function (obj) {
+        var url = window.location;
+        try {
+            obj.style.behavior = 'url(#default#homepage)';
+            obj.setHomePage(url);
+        } catch (e) {
+            if (window.netscape) {
+                try {
+                    netscape.security.PrivilegeManager.enablePrivilege("UniversalXPConnect");
+                } catch (e) {
+                    alert("抱歉，此操作被浏览器拒绝！\n\n请在浏览器地址栏输入“about:config”并回车然后将[signed.applets.codebase_principal_support]设置为'true'");
+                }
+            } else {
+                alert("抱歉，您所使用的浏览器无法完成此操作。\n\n您需要手动将【" + url + "】设置为首页。");
+            }
+        }
+    }
+    HeyLib.fn.init.prototype = HeyLib.fn;
+    window.HeyLib = window._$ = HeyLib;
 })(window);
