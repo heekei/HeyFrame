@@ -54,40 +54,7 @@
                 // HeyLib.log(_this);
             }
         },
-        // // etype,target,func
-        // // etype,func
-        // on: function (etype,/* target, */func) {
-        //     var p = arguments;
-        //     var _this = this;
-        //     var len = _this.length;
-        //     for (var x = 0; x < len; x++) {
-        //         // $.dir(_this[x]);
-        //         if (arguments.length == 2) {
-        //             _this[x].addEventListener(p[0], p[1]);
-        //         }
-        //         else {
-        //             _this[x].addEventListener(p[0], p[1], p[2]);
-        //         }
-        //     }
-        // },
-        // //etype,target,func
-        // //etype,func || etype
-        // off: function () {
-        //     var p = arguments;
-        //     var _this = this;
-        //     var len = _this.length;
-        //     for (var x = 0; x < len; x++) {
-        //         if (p.length == 1) {
-        //             _this[x].removeEventListener(p[0]);
-        //         }
-        //         else if (p.length == 2) {
-        //             _this[x].removeEventListener(p[0], null);
-        //         }
-        //         else {
-        //             _this[x].removeEventListener(p[0], p[1], p[2]);
-        //         }
-        //     }
-        // }
+
     };
     HeyLib.log = function (params) {
         console.log(params);
@@ -95,23 +62,6 @@
     HeyLib.dir = function (params) {
         console.dir(params);
     };
-    // HeyLib.getJSON = function (url, param, callback) {
-    //     // var cb;
-    //     // (typeof callback =="string")?
-    //     var callbackFunction = callback;
-    //     cb = function (data) {
-    //         // setTimeout(function(){
-    //         //     callbackFunction(data);
-    //         // },0)
-    //         callbackFunction(data);
-    //     };
-    //     s = document.createElement("script");
-    //     s.src = url + ("?" + param + "&cb=cb");
-    //     document.head.appendChild(s);
-    //     // callbackFunction();
-    // }
-
-
     /**
      * 改造setInterval，使其支持传参
      * @method setTimer
@@ -171,10 +121,10 @@
      */
     HeyLib.noConflict = function (obj) {
         if (typeof obj !== "undefined") {
-            window.$ = obj;
+            window._$ = obj;
         }
         else {
-            window.$ = undefined;
+            window._$ = undefined;
         }
     };
     /** 

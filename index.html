@@ -4,12 +4,12 @@
 <head>
 	<title>HeyFrame</title>
 	<meta charset="UTF-8">
-    <style>
+	<style>
 		ul.car {
 			position: absolute;
-			height:200px;
-            padding:0;
-            overflow:hidden;
+			height: 200px;
+			padding: 0;
+			overflow: hidden;
 		}
 		
 		ul.car:after {
@@ -23,37 +23,75 @@
 			width: 300px;
 			height: 300px;
 			background: lightblue;
-            list-style:none;
-            margin:0 10px;
+			list-style: none;
+			margin: 0 10px;
 		}
-        .ctn{
-            position:relative;
-            width:600px;
-            height:300px;
-            overflow:hidden;
-        }
+		
+		.ctn {
+			position: relative;
+			width: 600px;
+			height: 300px;
+			overflow: hidden;
+		}
 	</style>
 	<script src="require.js"></script>
 	<!--<script src="HeyLib.js"></script>-->
 	<script>
-        require("HeyLib.js");
-        require("jquery-2.1.0.js",function(){
-            require("h_carousel.js",function(){
-                var a = new h_carousel({
-                    $container:$(".car"),
-                    ctrl:{
-                        prev:$(".prev"),
-                        next:$(".next")
-                    },
-                    autoPlay:true,
-                    delay:3000,
-                    direction:0,
-                    hoverPause:false
-                })
-            })
-            
-        });
+        /*require({url:"HeyLib.js"});*/
+		
+		//https://code.jquery.com/jquery-3.1.1.js
+            require({
+				depends:["HeyLib.js","http://125.70.9.212:8002/cas/js/jquery-1.8.3.min.js"],
+				url:"h_carousel.js",
+				callback:function(){
+					window.a = new h_carousel({
+						$container:$("#c1"),
+						ctrl:{
+							prev:$(".prev1"),
+							next:$(".next1")
+						},
+						autoPlay:true,
+						delay:3000,
+						direction:1,
+						hoverPause:false
+					})
+					window.b = new h_carousel({
+						$container:$("#c2"),
+						ctrl:{
+							prev:$(".prev2"),
+							next:$(".next2")
+						},
+						autoPlay:true,
+						delay:3000,
+						direction:0,
+						hoverPause:false
+					})
+				},
+				defer:true})
+		require({url:"lazyLoad.js",callback:function(){
+			var cb = function(){
+				window.onscroll = null;
+				console.log(window.onscroll)
+				setTimeout(function(){
+					console.log(isVisible($(".c")[0]))
+					window.onscroll = cb;
+				},300)
+			};
+			window.onscroll = cb
+		},defer:true})
+		require({
+			depends:[
+			"http://c.csdnimg.cn//atsuggest/atsuggest.js","lazyLoad.js"],
+			url:"https://cdn.optimizely.com/js/237572123.js"
+		})
         //console.timeEnd()
+		/*setTimeout(function(){
+			require({
+			depends:[
+			"http://c.csdnimg.cn//atsuggest/atsuggest.js"],
+			url:"http://ads.csdn.net/js/tracking.js"
+		})
+		},0)*/
     </script>
 </head>
 <!--https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd=%E5%85%B3%E9%94%AE%E5%AD%97&cb=callback-->
@@ -62,20 +100,31 @@
 
 	<div>
 		<div class="ctn">
-			<ul class="car">
+			<ul id="c1" class="car">
 				<li>11111111111</li>
 				<li style="background:blue;">222222222</li>
 				<li style="background:red;">333333333333</li>
 			</ul><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
-			<div class="prev">上一张</div>
-			<div class="next">下一张</div>
+			<div class="prev1">上一张</div>
+			<div class="next1">下一张</div>
+		</div>
+		<div class="ctn">
+			<ul id="c2" class="car">
+				<li>11111111111</li>
+				<li style="background:blue;">222222222</li>
+				<li style="background:red;">333333333333</li>
+			</ul><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+			<div class="prev2">上一张</div>
+			<div class="next2">下一张</div>
 		</div>
 	</div>
-	<div style="width: 300px; height: 300px; background: lightblue;" class="dc-width-10% cls1 cs2">adas</div>
-	<div style="width: 300px; height: 300px; background: lightblue;" class="dc-width-20% cls1">adas</div>
-	<div style="width: 300px; height: 300px; background: lightblue;" class="dc-width-30% cls1">adas</div>
-	<div style="width: 300px; height: 300px; background: lightblue;" class="dc-width-40% cls1">adas</div>
-	<div style="width: 300px; height: 300px; background: lightblue;" class="dc-width-50% cls1">adas</div>
+	<div style="width: 300px; height: 300px; background: lightblue;" class="dc-width-10% cls1 cs2 a">a</div>
+	<div style="width: 300px; height: 300px; background: lightblue;" class="dc-width-20% cls1">b</div>
+	<div style="width: 300px; height: 300px; background: red;" class="dc-width-30% cls1 c">c</div>
+	<div style="width: 300px; height: 300px; background: lightblue;" class="dc-width-40% cls1">d</div>
+	<div style="width: 300px; height: 300px; background: lightblue;" class="dc-width-50% cls1">e</div>
+	<div style="width: 300px; height: 300px; background: lightblue;" class="dc-width-40% cls1">d</div>
+	<div style="width: 300px; height: 300px; background: lightblue;" class="dc-width-50% cls1">e</div>
 </body>
 
 </html>
